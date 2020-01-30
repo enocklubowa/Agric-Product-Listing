@@ -1,0 +1,77 @@
+{
+  "project_info": {
+    "project_number": "270210980688",
+    "firebase_url": "https://student-ec89e.firebaseio.com",
+    "project_id": "student-ec89e",
+    "storage_bucket": "student-ec89e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:270210980688:android:95e70205c495f26cda2a55",
+        "android_client_info": {
+          "package_name": "com.example.demo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "270210980688-bm4ppub1utipa2lr9mttva2puinp43ha.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.demo",
+            "certificate_hash": "f0c8be1b7988850383956940d2925b21e1a660ab"
+          }
+        },
+        {
+          "client_id": "270210980688-ocf75ev4d4b20hjt7vmon4gnuodfv9n1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxGHhtCfbzbnncDWu2Du2MyfUabbf-kjQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "270210980688-ocf75ev4d4b20hjt7vmon4gnuodfv9n1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:270210980688:android:073e6a9b74df2559da2a55",
+        "android_client_info": {
+          "package_name": "com.example.formdbdemo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "270210980688-ocf75ev4d4b20hjt7vmon4gnuodfv9n1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxGHhtCfbzbnncDWu2Du2MyfUabbf-kjQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "270210980688-ocf75ev4d4b20hjt7vmon4gnuodfv9n1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -61,12 +61,13 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="USERNAME"
+                            android:text="Email address"
                             android:textAlignment="center"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
                             android:textColor="@color/grey_40" />
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/email"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="-4dp"
@@ -90,6 +91,7 @@
                             android:textColor="@color/grey_40" />
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/password"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="-4dp"
@@ -98,6 +100,8 @@
                             android:maxLength="50"
                             android:maxLines="1"
                             android:singleLine="true"
+                            app:passwordToggleEnabled="true"
+                            app:passwordToggleTint="@color/colorAccent"
                             android:theme="@style/EditText.Grey" />
 
                         <View
@@ -137,6 +141,7 @@
                                 android:layout_height="wrap_content"
                                 android:clickable="true"
                                 android:text="Sign Up"
+                                android:onClick="goToSignup"
                                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
                                 android:textColor="@color/colorPrimaryLight"
                                 android:textStyle="bold" />
