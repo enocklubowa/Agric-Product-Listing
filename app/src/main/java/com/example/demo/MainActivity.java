@@ -1,14 +1,14 @@
 package com.example.demo;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -27,9 +27,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        auth = FirebaseAuth.getInstance();
+        loginStatus();
         email_field = findViewById(R.id.email);
         password_field = findViewById(R.id.password);
-        auth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(this){
             @Override
             public void onBackPressed() {
@@ -71,6 +72,13 @@ public class MainActivity extends AppCompatActivity {
     public void goToSignup(View view){
         startActivity(new Intent(this, RegisterActivity.class));
         finish();
+    }
+
+    private void loginStatus(){
+        if(auth.getCurrentUser() != null){
+            startActivity(new Intent(this, HomeActivity.class));
+            finish();
+        }
     }
 
 }

@@ -1,33 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeActivity"
-    android:orientation="vertical"
-    >
-    <include layout="@layout/toolbar"/>
+    android:background="@color/grey_5">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center">
-        <TextView
+        android:orientation="vertical">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nested_scroll_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="50dp"
-            android:text="This page is still under construction\nPlease check later"
-            android:gravity="center" />
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="log out"
-            android:onClick="logOut"/>
+            android:layout_height="match_parent"
+            android:scrollbars="none"
+            android:scrollingCache="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:descendantFocusability="blocksDescendants"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize" />
+
+                <include layout="@layout/fragment_tabs_store" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize" />
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
     </LinearLayout>
 
+    <include layout="@layout/toolbar"/>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
 
-</LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@drawable/bg_gradient_soft" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="@dimen/spacing_medium">
+
+                <ImageButton
+                    android:layout_width="?attr/actionBarSize"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:tint="@color/teal_600"
+                    app:srcCompat="@drawable/ic_home" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="?attr/actionBarSize"
+                android:layout_height="0dp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:padding="@dimen/spacing_medium">
+
+                <ImageButton
+                    android:layout_width="?attr/actionBarSize"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:tint="@color/teal_500"
+                    app:srcCompat="@drawable/ic_profile" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="15dp"
+        android:clickable="true"
+        android:onClick="clickAction"
+        app:background="@color/colorPrimary"
+        app:elevation="2dp"
+        app:fabSize="normal"
+        app:rippleColor="@color/grey_40"
+        android:src="@drawable/ic_add" />
+
+</RelativeLayout>

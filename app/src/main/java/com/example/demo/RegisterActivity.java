@@ -16,12 +16,15 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity {
     private TextInputEditText email_field, phone_field, name_field, password_field;
     private String email, phone, name, password;
     private FirebaseAuth auth;
     private ProgressDialog progressDialog;
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,7 @@ public class RegisterActivity extends AppCompatActivity {
         name_field = findViewById(R.id.name);
         phone_field = findViewById(R.id.phone);
         password_field = findViewById(R.id.password);
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("users");
         auth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(this){
             @Override
