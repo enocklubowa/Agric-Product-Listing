@@ -6,39 +6,13 @@
     android:layout_height="match_parent"
     android:background="@color/grey_5">
 
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/frame_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/nested_scroll_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="none"
-            android:scrollingCache="true">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:descendantFocusability="blocksDescendants"
-                android:orientation="vertical">
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize" />
-
-                <include layout="@layout/fragment_tabs_store" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize" />
-
-            </LinearLayout>
-
-        </androidx.core.widget.NestedScrollView>
-
-    </LinearLayout>
+    </FrameLayout>
 
     <include layout="@layout/toolbar"/>
 
@@ -67,10 +41,11 @@
                 android:padding="@dimen/spacing_medium">
 
                 <ImageButton
+                    android:id="@+id/home_button"
                     android:layout_width="?attr/actionBarSize"
                     android:layout_height="?attr/actionBarSize"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:tint="@color/teal_600"
+                    android:onClick="openScreen"
                     app:srcCompat="@drawable/ic_home" />
 
             </LinearLayout>
@@ -87,10 +62,11 @@
                 android:padding="@dimen/spacing_medium">
 
                 <ImageButton
+                    android:id="@+id/profile_button"
                     android:layout_width="?attr/actionBarSize"
                     android:layout_height="?attr/actionBarSize"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:tint="@color/teal_500"
+                    android:onClick="openScreen"
                     app:srcCompat="@drawable/ic_profile" />
 
             </LinearLayout>
@@ -107,10 +83,11 @@
         android:layout_marginBottom="15dp"
         android:clickable="true"
         android:onClick="clickAction"
-        app:background="@color/colorPrimary"
+        android:tint="@color/colorPrimary"
+        app:backgroundTint="@color/colorPrimary"
         app:elevation="2dp"
         app:fabSize="normal"
         app:rippleColor="@color/grey_40"
-        android:src="@drawable/ic_add" />
+        app:srcCompat="@drawable/ic_new" />
 
 </RelativeLayout>

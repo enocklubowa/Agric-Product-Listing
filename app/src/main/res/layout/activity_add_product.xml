@@ -79,8 +79,8 @@
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/image_1"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
                         android:layout_centerInParent="true"
                         android:tint="@color/grey_20"
                         android:onClick="uploadImage1"
@@ -113,8 +113,8 @@
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/image_2"
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
                         android:layout_centerInParent="true"
                         android:tint="@color/grey_20"
                         android:onClick="uploadImage2"
@@ -209,6 +209,32 @@
                     android:textColor="@color/grey_60" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_mlarge"
+                android:text="Price"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:textColor="@color/grey_40" />
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_middle"
+                android:background="@color/grey_3"
+                app:hintEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/product_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/edit_text_round_bg_outline"
+                    android:textColorHint="@color/grey_20" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
 
         </LinearLayout>
 

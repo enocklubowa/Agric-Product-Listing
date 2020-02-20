@@ -15,11 +15,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 
+import com.example.demo.model.Product;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -36,9 +36,9 @@ public class AddProductActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private StorageReference storageReference;
     private DatabaseReference databaseReference;
-    private String imageUrl;
+    private String imageUrl_1, imageUrl_2;
     private AppCompatImageView image_1, image_2;
-    private TextInputEditText product_name, product_location, product_description;
+    private TextInputEditText product_name, product_location, product_description, product_price;
 
 
 
@@ -53,6 +53,7 @@ public class AddProductActivity extends AppCompatActivity {
         product_name = findViewById(R.id.product_name);
         product_location = findViewById(R.id.product_location);
         product_description = findViewById(R.id.product_description);
+        product_price = findViewById(R.id.product_price);
         bt_close.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -111,7 +112,8 @@ public class AddProductActivity extends AppCompatActivity {
     }
 
     public void saveDeal(View v){
-        if(product_name.getText() == null || product_description.getText() == null || product_location.getText() == null || imageUri_1 == null){
+        if(product_name.getText() == null || product_description.getText() == null ||
+                product_location.getText() == null || imageUri_1 == null || product_price.getText() == null){
             Toast.makeText(this, "Please provide all the required details", Toast.LENGTH_SHORT).show();
         }
         else {
@@ -120,7 +122,8 @@ public class AddProductActivity extends AppCompatActivity {
             storageReference = FirebaseStorage.getInstance().getReference().child("productImages").child(imageUri_1.getLastPathSegment());
 
             Task<UploadTask.TaskSnapshot> uploadTask = storageReference.putFile(imageUri_1);
-            Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+            Task<UploadTask.TaskSnapshot> uploadTask_1 = storageReference.putFile(imageUri_2);
+            uploadTask_1.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                 @Override
                 public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
                     if (!task.isSuccessful()) {
@@ -134,13 +137,43 @@ public class AddProductActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
                     if (task.isSuccessful()) {
+                        Uri downloadUri = task.getResult();
+                        imageUrl_2 = downloadUri.toString();
+                    }
+                }
+            });
+
+
+
+
+            uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                @Override
+                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    if (!task.isSuccessful()) {
+                        throw task.getException();
+                    }
+                    // Continue with the task to get the download URL
+                    return storageReference.getDownloadUrl();
+                }
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    if (task.isSuccessful()) {
                         progressDialog.cancel();
                         Uri downloadUri = task.getResult();
-                        imageUrl = downloadUri.toString();
+                        imageUrl_1 = downloadUri.toString();
                         databaseReference = FirebaseDatabase.getInstance().getReference()
-                                .child("products").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-                        databaseReference.push().setValue(new Product(product_name.getText().toString(),
-                                product_location.getText().toString(),product_description.getText().toString(),imageUrl));
+                                .child("products");
+                        databaseReference.push().setValue(new Product(
+                                product_name.getText().toString(),
+                                product_description.getText().toString(),
+                                imageUrl_1,
+                                imageUrl_2,
+                                product_location.getText().toString(),
+                                "Today",
+                                product_price.getText().toString()
+                                )
+                        );
                         progressDialog.cancel();
                         progressDialog.dismiss();
                         Toast.makeText(AddProductActivity.this, "Product added successfully", Toast.LENGTH_SHORT).show();
