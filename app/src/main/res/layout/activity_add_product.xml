@@ -73,14 +73,14 @@
                 android:padding="@dimen/spacing_large">
 
                 <RelativeLayout
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
                     android:background="@color/grey_3">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/image_1"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:layout_centerInParent="true"
                         android:tint="@color/grey_20"
                         android:onClick="uploadImage1"
@@ -107,14 +107,14 @@
                 android:padding="@dimen/spacing_large">
 
                 <RelativeLayout
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
                     android:background="@color/grey_3">
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/image_2"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:layout_centerInParent="true"
                         android:tint="@color/grey_20"
                         android:onClick="uploadImage2"

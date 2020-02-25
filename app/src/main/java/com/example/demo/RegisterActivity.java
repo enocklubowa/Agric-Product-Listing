@@ -71,15 +71,13 @@ public class RegisterActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
-                                Log.e("Sign up status","Successful");
-                                startActivity(new Intent(RegisterActivity.this, HomeActivity.class));
-                                finish();
+                                saveUserInfo(name, phone, email);
                             }
                             else {
                                 Log.e("Sign up status","Unsuccessful");
-
                                 progressDialog.cancel();
-                                Toast.makeText(RegisterActivity.this, "Could not sign up\nPlease try again later", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RegisterActivity.this, "Could not sign up\nPlease try again later",
+                                        Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
@@ -94,5 +92,31 @@ public class RegisterActivity extends AppCompatActivity {
     public void onBackPressed() {
         startActivity(new Intent(this, MainActivity.class));
         finish();
+    }
+
+    private void saveUserInfo(String name, String phone, String email){
+        User user = new User(name, phone, email);
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("users").child(
+                FirebaseAuth.getInstance().getCurrentUser().getUid()
+        );
+        reference.setValue(user).addOnCompleteListener(
+                new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            Log.e("Sign up status","Successful");
+                            startActivity(new Intent(RegisterActivity.this, HomeActivity.class));
+                            finish();
+                        }
+                        else {
+                            Log.e("Sign up status","Unsuccessful");
+                            progressDialog.cancel();
+                            Toast.makeText(RegisterActivity.this, "Could not sign up\nPlease try again later",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+        );
+
     }
 }

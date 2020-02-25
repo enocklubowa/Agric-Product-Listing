@@ -3,9 +3,11 @@ package com.example.demo;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -20,6 +22,7 @@ import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -27,6 +30,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 public class AddProductActivity extends AppCompatActivity {
     private ImageButton bt_close;
@@ -92,8 +96,11 @@ public class AddProductActivity extends AppCompatActivity {
         if(requestCode == PICTURE_RESULT_1 && resultCode == RESULT_OK ){
             imageUri_1 = data.getData();
             try{
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri_1);
-                image_1.setImageBitmap(bitmap);
+                final InputStream imageStream = getContentResolver().openInputStream(imageUri_1);
+                final Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
+                //Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), imageUri_1);
+                image_1.setImageBitmap(selectedImage);
+
             }
             catch (IOException e){
                 e.printStackTrace();
@@ -112,6 +119,8 @@ public class AddProductActivity extends AppCompatActivity {
     }
 
     public void saveDeal(View v){
+        Log.e("Data to be submitted ",product_name.getText().toString()+product_description.getText().toString()
+                +product_location.getText().toString()+product_price.getText().toString());
         if(product_name.getText() == null || product_description.getText() == null ||
                 product_location.getText() == null || imageUri_1 == null || product_price.getText() == null){
             Toast.makeText(this, "Please provide all the required details", Toast.LENGTH_SHORT).show();
@@ -171,8 +180,8 @@ public class AddProductActivity extends AppCompatActivity {
                                 imageUrl_2,
                                 product_location.getText().toString(),
                                 "Today",
-                                product_price.getText().toString()
-                                )
+                                product_price.getText().toString(),
+                                FirebaseAuth.getInstance().getCurrentUser().getUid())
                         );
                         progressDialog.cancel();
                         progressDialog.dismiss();

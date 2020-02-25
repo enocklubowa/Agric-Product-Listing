@@ -1,6 +1,5 @@
 package com.example.demo;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,11 +48,6 @@ public class ProductListFragment extends Fragment {
         return root;
     }
 
-    private void logOut(){
-        auth.signOut();
-        startActivity(new Intent(getContext(), MainActivity.class));
-        getActivity().finish();
-    }
 
     private void populateProducts(){
 

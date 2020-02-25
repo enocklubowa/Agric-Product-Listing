@@ -1,32 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    android:background="@color/grey_10">
 
-
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nested_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center">
-        <TextView
+        android:clipToPadding="false"
+        android:scrollbars="none"
+        android:scrollingCache="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="50dp"
-            android:text="This page is still under construction\nPlease check later"
-            android:gravity="center" />
-        <Button
-            android:id="@+id/log_out_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="log out"/>
-    </LinearLayout>
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/spacing_middle" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_middle"
+                android:layout_marginLeft="@dimen/spacing_large"
+                android:layout_marginRight="@dimen/spacing_large"
+                android:layout_marginTop="@dimen/spacing_middle"
+                android:visibility="visible"
+                app:cardCornerRadius="3dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <com.mikhaellopez.circularimageview.CircularImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginTop="@dimen/spacing_xlarge"
+                        android:src="@drawable/profile_image"
+                        app:civ_border="true"
+                        app:civ_shadow="true"
+                        app:civ_shadow_radius="0"
+                        app:civ_border_color="@color/colorPrimary"
+                        app:civ_border_width="1dp" />
+
+                    <com.elyeproj.loaderviewlibrary.LoaderTextView
+                        android:id="@+id/name_field"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_large"
+                        android:text="                      "
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+                        android:textColor="@color/grey_90" />
+
+                    <com.elyeproj.loaderviewlibrary.LoaderTextView
+                        android:id="@+id/email_field"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="                      "
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textColor="@color/grey_40" />
+
+                    <com.elyeproj.loaderviewlibrary.LoaderTextView
+                        android:id="@+id/phone_field"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="                      "
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:textColor="@color/grey_40" />
 
 
 
-</LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/spacing_middle"
+                        android:background="@color/grey_5" />
+
+                    <LinearLayout
+                        android:id="@+id/log_out_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:padding="@dimen/spacing_medium">
+
+                        <ImageButton
+                            android:layout_width="?attr/actionBarSize"
+                            android:layout_height="?attr/actionBarSize"
+                            android:background="@android:color/transparent"
+                            android:tint="@color/grey_20"
+                            app:srcCompat="@drawable/ic_logout" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="LOG OUT"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+                            android:textColor="@color/colorPrimary" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/spacing_middle" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="vertical"
+                    android:scrollingCache="true"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+                <ProgressBar
+                    android:id="@+id/loading_products"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"/>
+            </RelativeLayout>
+
+
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

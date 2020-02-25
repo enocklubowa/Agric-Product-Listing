@@ -1,12 +1,13 @@
 package com.example.demo.model;
 
 public class Product {
-    private String name, description, image_one_url, image_two_url, location, time_added, price;
+    private String name, description, image_one_url, image_two_url, location, time_added, price, userId;
 
     public Product() {
     }
 
-    public Product(String name, String description, String image_one_url, String image_two_url, String location, String time_added, String price) {
+    public Product(String name, String description, String image_one_url, String image_two_url, String location,
+                   String time_added, String price, String userId) {
         this.name = name;
         this.description = description;
         this.image_one_url = image_one_url;
@@ -14,10 +15,15 @@ public class Product {
         this.location = location;
         this.time_added = time_added;
         this.price = price;
+        this.userId = userId;
     }
 
     public String getPrice() {
         return price;
+    }
+
+    public String getUserId() {
+        return userId;
     }
 
     public String getName() {
@@ -70,5 +76,9 @@ public class Product {
 
     public void setPrice(String price) {
         this.price = price;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }
