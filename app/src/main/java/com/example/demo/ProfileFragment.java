@@ -2,6 +2,7 @@ package com.example.demo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,11 +46,13 @@ public class ProfileFragment extends Fragment {
         logout_button = root.findViewById(R.id.log_out_button);
         loading_products = root.findViewById(R.id.loading_products);
         recyclerView = root.findViewById(R.id.recyclerView);
-        reference = FirebaseDatabase.getInstance().getReference().child("products");
+        reference = FirebaseDatabase.getInstance().getReference().child("products").orderByChild("userId").equalTo(
+                FirebaseAuth.getInstance().getCurrentUser().getUid()
+        );
 
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         //recyclerView.addItemDecoration(new SpacingItemDecoration(2, Tools.dpToPx(this, 8), true));
-        recyclerView.setHasFixedSize(true);
+        //recyclerView.setHasFixedSize(true);
         recyclerView.setNestedScrollingEnabled(false);
         getUserInfo();
         populateProducts();
@@ -102,12 +105,15 @@ public class ProfileFragment extends Fragment {
         ) {
             @Override
             protected void onBindViewHolder(@NonNull ProductAdapter holder, int position, @NonNull Product model) {
+                Log.e("Binded view holder", "Binded view");
+
                 holder.setDetails(model.getName(), model.getLocation(), model.getPrice());
             }
 
             @NonNull
             @Override
             public ProductAdapter onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                Log.e("created view holder", "created view");
                 View view = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.row_product, parent, false);
                 loading_products.setVisibility(View.GONE);
