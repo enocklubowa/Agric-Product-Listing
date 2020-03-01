@@ -1,32 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
-
+    android:background="@android:color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center">
-        <TextView
+        android:background="@android:color/white"
+        android:orientation="vertical">
+        <FrameLayout
+            android:id="@+id/demo_frame"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/navigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="50dp"
-            android:text="This page is still under construction\nPlease check later"
-            android:gravity="center" />
-        <Button
-            android:id="@+id/log_out_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:text="log out"/>
+            android:layout_gravity="bottom"
+            android:background="@android:color/white"
+            app:itemTextAppearanceActive="@style/TextAppearance.AppCompat.Caption"
+            app:itemTextAppearanceInactive="@style/TextAppearance.AppCompat.Caption"
+            app:labelVisibilityMode="labeled"
+            app:menu="@menu/bottom_navigation_menu" />
+
     </LinearLayout>
 
 
 
-</LinearLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:onClick="clickAction"
+        app:elevation="2dp"
+        app:fabSize="normal"
+        android:tint="#ffffff"
+        app:backgroundTint="@color/colorPrimary"
+        app:rippleColor="@color/grey_40"
+        app:srcCompat="@drawable/ic_add"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="60dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"/>
+
+</RelativeLayout>

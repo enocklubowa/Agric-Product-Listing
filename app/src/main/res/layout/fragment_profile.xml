@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey_10"
-    android:layout_marginBottom="50dp">
+    android:background="@color/grey_10">
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nested_content"
@@ -29,8 +28,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/spacing_middle"
-                android:layout_marginLeft="@dimen/spacing_large"
-                android:layout_marginRight="@dimen/spacing_large"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:layout_marginTop="@dimen/spacing_middle"
                 android:visibility="visible"
                 app:cardCornerRadius="3dp"
@@ -58,7 +57,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/spacing_large"
-                        android:text="                      "
+                        android:text="loading name.."
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
                         android:textColor="@color/grey_90" />
 
@@ -66,7 +65,7 @@
                         android:id="@+id/email_field"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="                      "
+                        android:text="loading email..."
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textColor="@color/grey_40" />
 
@@ -74,7 +73,7 @@
                         android:id="@+id/phone_field"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="                      "
+                        android:text="loading phone.."
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                         android:textColor="@color/grey_40" />
 
@@ -121,7 +120,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/spacing_middle" />
 
-            <include layout="@layout/product_list"/>
+            <include layout="@layout/product_list"
+                />
 
 
 

@@ -34,14 +34,12 @@ public class ProductListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_product_list, container, false);
-
-
         reference = FirebaseDatabase.getInstance().getReference().child("products");
 
         recyclerView = (RecyclerView) root.findViewById(R.id.recyclerView);
         loading_products = (ProgressBar) root.findViewById(R.id.loading_products);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
-        //recyclerView.addItemDecoration(new SpacingItemDecoration(2, Tools.dpToPx(this, 8), true));
+        recyclerView.addItemDecoration(new SpacingItemDecoration(2, Tools.dpToPx(getContext(), 8), true));
         recyclerView.setHasFixedSize(true);
         recyclerView.setNestedScrollingEnabled(false);
         populateProducts();

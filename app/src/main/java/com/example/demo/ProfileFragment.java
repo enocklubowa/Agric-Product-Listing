@@ -46,6 +46,7 @@ public class ProfileFragment extends Fragment {
         logout_button = root.findViewById(R.id.log_out_button);
         loading_products = root.findViewById(R.id.loading_products);
         recyclerView = root.findViewById(R.id.recyclerView);
+        recyclerView.addItemDecoration(new SpacingItemDecoration(2, Tools.dpToPx(getContext(), 8), true));
         reference = FirebaseDatabase.getInstance().getReference().child("products").orderByChild("userId").equalTo(
                 FirebaseAuth.getInstance().getCurrentUser().getUid()
         );

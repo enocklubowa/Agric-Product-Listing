@@ -5,8 +5,7 @@
     android:layout_height="wrap_content"
     app:cardBackgroundColor="@android:color/white"
     app:cardCornerRadius="2dp"
-    app:cardElevation="2dp"
-    android:layout_margin="10dp">
+    app:cardElevation="2dp">
 
     <com.balysv.materialripple.MaterialRippleLayout
         style="@style/RippleStyleBlack"
@@ -70,7 +69,8 @@
             <TextView
                 android:id="@+id/product_location"
                 android:text="Location"
-                android:padding="@dimen/spacing_middle"
+                android:paddingStart="@dimen/spacing_middle"
+                android:paddingLeft="@dimen/spacing_middle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
@@ -79,25 +79,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
+                android:padding="@dimen/spacing_middle"
                 android:orientation="horizontal">
-
-                <View
-                    android:layout_width="@dimen/spacing_middle"
-                    android:layout_height="0dp" />
-
-                <androidx.appcompat.widget.AppCompatRatingBar
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:clickable="false"
-                    android:numStars="5"
-                    android:rating="3.5"
-                    android:stepSize="1"
-                    style="@style/Widget.AppCompat.RatingBar.Small"/>
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
 
                 <TextView
                     android:id="@+id/product_price"

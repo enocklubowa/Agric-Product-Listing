@@ -22,7 +22,7 @@ public class ProductAdapter extends RecyclerView.ViewHolder{
         location_field = (TextView) view.findViewById(R.id.product_location);
 
         name_field.setText(name);
-        price_field.setText("USh"+price);
+        price_field.setText("USh "+price);
         location_field.setText(location);
 
     }

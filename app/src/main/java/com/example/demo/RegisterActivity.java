@@ -105,7 +105,7 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
                             Log.e("Sign up status","Successful");
-                            startActivity(new Intent(RegisterActivity.this, HomeActivity.class));
+                            startActivity(new Intent(RegisterActivity.this, Demo.class));
                             finish();
                         }
                         else {
