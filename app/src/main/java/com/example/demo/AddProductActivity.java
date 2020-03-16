@@ -132,30 +132,31 @@ public class AddProductActivity extends AppCompatActivity {
             storageReference = FirebaseStorage.getInstance().getReference().child("productImages").child(imageUri_1.getLastPathSegment());
 
             Task<UploadTask.TaskSnapshot> uploadTask = storageReference.putFile(imageUri_1);
-            Task<UploadTask.TaskSnapshot> uploadTask_1 = storageReference.putFile(imageUri_2);
-            uploadTask_1.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-                @Override
-                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                    if (!task.isSuccessful()) {
-                        throw task.getException();
+            if(imageUrl_2 !=null){
+                Task<UploadTask.TaskSnapshot> uploadTask_1 = storageReference.putFile(imageUri_2);
+                uploadTask_1.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                    @Override
+                    public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                        if (!task.isSuccessful()) {
+                            throw task.getException();
+                        }
+
+                        // Continue with the task to get the download URL
+                        return storageReference.getDownloadUrl();
                     }
-
-                    // Continue with the task to get the download URL
-                    return storageReference.getDownloadUrl();
-                }
-            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
-                @Override
-                public void onComplete(@NonNull Task<Uri> task) {
-                    if (task.isSuccessful()) {
-                        Uri downloadUri = task.getResult();
-                        imageUrl_2 = downloadUri.toString();
+                }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+                        if (task.isSuccessful()) {
+                            Uri downloadUri = task.getResult();
+                            imageUrl_2 = downloadUri.toString();
+                        }
                     }
-                }
-            });
+                });
 
+            }
 
-
-
+            
             uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
                 @Override
                 public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
