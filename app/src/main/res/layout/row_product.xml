@@ -19,13 +19,12 @@
             android:clickable="true"
             android:orientation="vertical">
 
-            <ImageView
+            <com.elyeproj.loaderviewlibrary.LoaderImageView
                 android:id="@+id/product_cover_image"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:scaleType="centerCrop"
-                android:layout_margin="10dp"
-                app:srcCompat="@drawable/ic_photo" />
+                android:layout_margin="10dp" />
 
             <View
                 android:layout_width="0dp"

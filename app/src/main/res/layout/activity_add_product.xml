@@ -82,7 +82,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_centerInParent="true"
-                        android:tint="@color/grey_20"
                         android:onClick="uploadImage1"
                         app:srcCompat="@drawable/ic_photo" />
 
@@ -116,7 +115,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_centerInParent="true"
-                        android:tint="@color/grey_20"
                         android:onClick="uploadImage2"
                         app:srcCompat="@drawable/ic_photo" />
 

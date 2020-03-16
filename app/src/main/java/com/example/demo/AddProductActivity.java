@@ -78,10 +78,11 @@ public class AddProductActivity extends AppCompatActivity {
     }
 
     public void uploadImage1(View v){
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        Intent intent = new Intent();
         intent.setType("image/*");
-        intent.putExtra(Intent.EXTRA_LOCAL_ONLY,true);
-        startActivityForResult(intent.createChooser(intent, "insert Picture"), PICTURE_RESULT_1);
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICTURE_RESULT_1);
+
     }
     public void uploadImage2(View v){
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);

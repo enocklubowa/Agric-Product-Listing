@@ -108,7 +108,7 @@ public class ProfileFragment extends Fragment {
             protected void onBindViewHolder(@NonNull ProductAdapter holder, int position, @NonNull Product model) {
                 Log.e("Binded view holder", "Binded view");
 
-                holder.setDetails(model.getName(), model.getLocation(), model.getPrice());
+                holder.setDetails(model.getName(), model.getLocation(), model.getPrice(), model.getImage_one_url());
             }
 
             @NonNull
