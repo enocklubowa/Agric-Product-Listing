@@ -9,7 +9,7 @@
     <item
         android:id="@+id/navigation_2"
         android:icon="@drawable/ic_explore"
-        android:title="Explore" />
+        android:title="Pest &amp; Diseases" />
 
     <item
         android:id="@+id/navigation_4"
