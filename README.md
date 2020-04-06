@@ -15,3 +15,8 @@ External services:
   <li>Firebase storage</li>
   <li>Picasso image library</li>
 </ul>
+
+<h3>Demo</h3>
+<img src="1.png" height="40%" width="40%" alt="product listing">
+<img src="2.png" height="40%" width="40%" alt="pests & diseases listing">
+<img src="3.png" height="40%" width="40%" alt="profile page">
