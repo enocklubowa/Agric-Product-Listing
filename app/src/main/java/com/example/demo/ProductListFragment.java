@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -60,6 +61,7 @@ public class ProductListFragment extends Fragment {
             protected void onBindViewHolder(@NonNull ProductAdapter holder, int position, @NonNull Product model) {
                 holder.setDetails(model.getName(), model.getLocation(), model.getPrice(),
                         model.getImage_one_url(), model.getUserId(), model.getDescription());
+
             }
 
             @NonNull

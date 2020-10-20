@@ -11,8 +11,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
@@ -22,7 +24,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private View parent_view;
 
     private ImageButton bt_toggle_reviews, bt_toggle_warranty, bt_toggle_description;
-    private View lyt_expand_reviews, lyt_expand_warranty, lyt_expand_description;
+    private View lyt_expand_reviews;
     private NestedScrollView nested_scroll_view;
     private String userId;
     private String product_name;
@@ -32,6 +34,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private String description;
     private TextView description_field, location_field, price_field, name_field;
     private ImageView product_image;
+    private LinearLayout description_layout;
 
 
     @Override
@@ -58,6 +61,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
         product_image = findViewById(R.id.product_image);
 
+        description_field = findViewById(R.id.description);
+
         location_field = findViewById(R.id.location);
         location_field.setText(location);
 
@@ -82,19 +87,19 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
         // section description
         bt_toggle_description = (ImageButton) findViewById(R.id.bt_toggle_description);
-        description_field = findViewById(R.id.description);
+        description_layout = findViewById(R.id.description_layout);
         bt_toggle_description.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                toggleSection(view, lyt_expand_description);
+                toggleSection(view, description_layout);
             }
         });
 
         // expand first description
         toggleArrow(bt_toggle_description);
-        lyt_expand_description.setVisibility(View.VISIBLE);
+        description_layout.setVisibility(View.VISIBLE);
 
-        ((FloatingActionButton) findViewById(R.id.fab)).setOnClickListener(new View.OnClickListener() {
+        ((ExtendedFloatingActionButton) findViewById(R.id.fab)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Snackbar.make(parent_view, "Add to Cart", Snackbar.LENGTH_SHORT).show();
