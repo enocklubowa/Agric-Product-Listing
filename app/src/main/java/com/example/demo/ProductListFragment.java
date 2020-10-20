@@ -58,7 +58,8 @@ public class ProductListFragment extends Fragment {
         ) {
             @Override
             protected void onBindViewHolder(@NonNull ProductAdapter holder, int position, @NonNull Product model) {
-                holder.setDetails(model.getName(), model.getLocation(), model.getPrice(), model.getImage_one_url());
+                holder.setDetails(model.getName(), model.getLocation(), model.getPrice(),
+                        model.getImage_one_url(), model.getUserId(), model.getDescription());
             }
 
             @NonNull
