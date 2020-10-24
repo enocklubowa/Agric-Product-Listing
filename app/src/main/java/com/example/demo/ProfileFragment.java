@@ -118,8 +118,15 @@ public class ProfileFragment extends Fragment {
                 View view = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.row_product, parent, false);
                 loading_products.setVisibility(View.GONE);
-
                 return new ProductAdapter(view);
+            }
+
+            @Override
+            public int getItemCount() {
+                if (super.getItemCount() == 0){
+                    loading_products.setVisibility(View.GONE);
+                }
+                return super.getItemCount();
             }
         };
         recyclerView.setAdapter(firebaseRecyclerAdapter);

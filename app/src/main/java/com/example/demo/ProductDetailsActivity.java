@@ -7,6 +7,7 @@ import androidx.core.widget.NestedScrollView;
 import com.example.demo.utils.ViewAnimation;
 import com.example.demo.utils.Tools;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -26,7 +27,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private ImageButton bt_toggle_reviews, bt_toggle_warranty, bt_toggle_description;
     private View lyt_expand_reviews;
     private NestedScrollView nested_scroll_view;
-    private String userId;
+    private String sellerId;
     private String product_name;
     private String price;
     private String location;
@@ -62,6 +63,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         product_image = findViewById(R.id.product_image);
 
         description_field = findViewById(R.id.description);
+        description_field.setText(description);
 
         location_field = findViewById(R.id.location);
         location_field.setText(location);
@@ -102,7 +104,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         ((ExtendedFloatingActionButton) findViewById(R.id.fab)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Snackbar.make(parent_view, "Add to Cart", Snackbar.LENGTH_SHORT).show();
+                openChatActivity();
             }
         });
     }
@@ -133,12 +135,13 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
     private void getIntentExtras(){
         Bundle extras = getIntent().getExtras();
-        userId = extras.getString("USER_ID");
+        sellerId = extras.getString("USER_ID");
         product_name = extras.getString("PRODUCT_NAME");
         price = extras.getString("PRICE");
         location = extras.getString("LOCATION");
         imageUrl = extras.getString("IMAGE_URL");
         description = extras.getString("DESCRIPTION");
+
     }
 
     private void loadImage(){
@@ -151,7 +154,11 @@ public class ProductDetailsActivity extends AppCompatActivity {
         }
     }
 
-    public void openChatActivity(View view){
-
+    public void openChatActivity(){
+        Intent intent = new Intent(this, ChatActivity.class);
+        Bundle extras = new Bundle();
+        extras.putString("SELLER_ID", sellerId);
+        intent.putExtras(extras);
+        startActivity(intent);
     }
 }

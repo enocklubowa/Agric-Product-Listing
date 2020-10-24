@@ -435,7 +435,6 @@
         android:text="Message"
         android:textColor="@android:color/white"
         android:gravity="center"
-        android:onClick="openChatActivity"
         android:clickable="true"
         android:tint="@android:color/white"
         app:backgroundTint="@color/deep_orange_500"
