@@ -73,6 +73,14 @@ public class ProductListFragment extends Fragment {
 
                 return new ProductAdapter(view);
             }
+
+            @Override
+            public int getItemCount() {
+                if (super.getItemCount() == 0){
+                    loading_products.setVisibility(View.GONE);
+                }
+                return super.getItemCount();
+            }
         };
         recyclerView.setAdapter(firebaseRecyclerAdapter);
         firebaseRecyclerAdapter.startListening();

@@ -16,14 +16,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
-    String text, time;
     private final int FROM_ME = 100;
     private final int FROM_YOU = 200;
     private String userId;
     boolean isRead;
-    private List<Chat> chats = new ArrayList<>();
+    private ArrayList<Chat> chats = new ArrayList<>();
 
-    public ChatAdapter(List<Chat> chats, String userId){
+    public ChatAdapter(ArrayList<Chat> chats, String userId){
         this.chats = chats;
         this.userId = userId;
     }
@@ -32,47 +31,55 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     @NonNull
     @Override
     public ChatAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view;
-        Context context = parent.getContext();
-        LayoutInflater inflater = LayoutInflater.from(context);
+        ChatAdapter.ViewHolder viewHolder;
         if(viewType == FROM_ME){
-            view = inflater.inflate(R.layout.item_chat_me, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_chat_me, parent, false);
+            viewHolder = new ViewHolder(view);
         }
         else {
-            view = inflater.inflate(R.layout.item_chat_you, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_chat_you, parent, false);
+            viewHolder = new ViewHolder(view);
         }
-        ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
     @Override
     public int getItemViewType(int position) {
-        if(chats.get(position).getSender().equals(userId)){
+        if(this.chats.get(position).getSender().equals(userId)){
             return FROM_ME;
         }
         return FROM_YOU;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ChatAdapter.ViewHolder holder, int position) {
-        holder.timeField.setText(time);
-        holder.messageField.setText(text);
+    public int getItemCount() {
+        return chats.size();
     }
 
     @Override
-    public int getItemCount() {
-        return 0;
+    public void onBindViewHolder(@NonNull ChatAdapter.ViewHolder holder, int position) {
+        Chat chat = chats.get(position);
+        holder.timeField.setText(chat.getTime());
+        holder.messageField.setText(chat.getText());
+
     }
+
+
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView timeField, messageField;
+        public TextView timeField, messageField;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            timeField = (TextView) itemView.findViewById(R.id.text_time_you);
-            messageField = (TextView) itemView.findViewById(R.id.text_content_you);
+            timeField = (TextView) itemView.findViewById(R.id.text_time);
+            messageField = (TextView) itemView.findViewById(R.id.text_content);
 
-            timeField.setText(time);
-            messageField.setText(text);
         }
     }
+
+    public void insertItem(Chat item) {
+        this.chats.add(item);
+        notifyItemInserted(getItemCount());
+    }
+
 }

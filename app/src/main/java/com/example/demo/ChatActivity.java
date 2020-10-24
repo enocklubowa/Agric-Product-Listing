@@ -59,9 +59,10 @@ public class ChatActivity extends AppCompatActivity {
     private final int CHAT_YOU = 200;
     private String sellerName, sellerId;
     private TextView sellerNameField;
-    private List<Chat> chats;
+    private ArrayList<Chat> chats = new ArrayList<>();
     private List<Chat> sentChats = new ArrayList<>();
     private List<Chat> receivedChats = new ArrayList<>();
+    private ChatAdapter chatAdapter;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -72,6 +73,7 @@ public class ChatActivity extends AppCompatActivity {
         initToolbar();
         iniComponent();
     }
+
 
     public void initToolbar() {
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -90,11 +92,8 @@ public class ChatActivity extends AppCompatActivity {
         recycler_view.setLayoutManager(layoutManager);
         recycler_view.setHasFixedSize(true);
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        chats = new ArrayList<Chat>();
 
-        retrieveSentChats();
-        Log.e("Chats", chats.toString());
-
+        updateChats();
 
         /*
         retrieveReceivedChats();
@@ -113,6 +112,7 @@ public class ChatActivity extends AppCompatActivity {
 
         btn_send = findViewById(R.id.btn_send);
         textContent = findViewById(R.id.text_content);
+        showKeyboard(textContent);
         sellerNameField = findViewById(R.id.seller_name);
         btn_send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,29 +130,19 @@ public class ChatActivity extends AppCompatActivity {
         });
     }
 
+
     private void sendChat() {
         if(textContent.getText().length() != 0){
             Long time = System.currentTimeMillis()/1000;
             Chat chat = new Chat(textContent.getText().toString(), time.toString(), userId, sellerId, false);
             DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("chats").push();
             reference.setValue(chat);
+            //chatAdapter.insertItem(chat);
+            chatAdapter.notifyDataSetChanged();
             textContent.getText().clear();
+            hideKeyboard();
         }
 
-    }
-
-    @Override
-    public void onPostCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onPostCreate(savedInstanceState, persistentState);
-        hideKeyboard();
-    }
-
-    private void hideKeyboard() {
-        View view = this.getCurrentFocus();
-        if (view != null) {
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        }
     }
 
     private TextWatcher contentWatcher = new TextWatcher() {
@@ -174,19 +164,18 @@ public class ChatActivity extends AppCompatActivity {
         }
     };
 
-    private void retrieveSentChats(){
-        Query chatsReference = FirebaseDatabase.getInstance().getReference().child("chats");
-
-        chatsReference.addValueEventListener(
+    private void retrieveChats(){
+        DatabaseReference chatsReference = FirebaseDatabase.getInstance().getReference().child("chats");
+        chatsReference.addListenerForSingleValueEvent(
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         for(DataSnapshot snapshot: dataSnapshot.getChildren()){
                             Chat chat = snapshot.getValue(Chat.class);
                             if((chat.getSender().equals(userId) && chat.getReceiver().equals(sellerId))
-                                    || (chat.getSender().equals(sellerId) && chat.getReceiver().equals(userId))){
+                                    || (chat.getSender().equals(sellerId) && chat.getReceiver().equals(userId))
+                            ){
                                 chats.add(chat);
-                                //displayChat(chat);
                             }
                         }
                         displayChats(chats);
@@ -202,16 +191,38 @@ public class ChatActivity extends AppCompatActivity {
 
     }
 
-    private void retrieveReceivedChats(){
-        Query chatsReference = FirebaseDatabase.getInstance().getReference().child("chats")
-                .orderByChild("receiver").equalTo(userId);
 
+
+    private void hideKeyboard() {
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
+
+
+    public void showKeyboard(View view) {
+        if (view.requestFocus()) {
+            InputMethodManager imm = (InputMethodManager)
+                    getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
+        }
+    }
+
+    private void updateChats(){
+        DatabaseReference chatsReference = FirebaseDatabase.getInstance().getReference().child("chats");
         chatsReference.addChildEventListener(
                 new ChildEventListener() {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                         Chat chat = dataSnapshot.getValue(Chat.class);
-                        receivedChats.add(chat);
+                        if((chat.getSender().equals(userId) && chat.getReceiver().equals(sellerId))
+                                || (chat.getSender().equals(sellerId) && chat.getReceiver().equals(userId))){
+                            chats.add(chat);
+                            //displayChat(chat);
+                        }
                     }
 
                     @Override
@@ -236,14 +247,9 @@ public class ChatActivity extends AppCompatActivity {
                 }
         );
 
-
+        displayChats(chats);
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-    }
 
     private void getIntentExtra(){
         Bundle extras = getIntent().getExtras();
@@ -268,9 +274,11 @@ public class ChatActivity extends AppCompatActivity {
 
     }
 
-    private void displayChats(List<Chat> chats){
-        ChatAdapter chatAdapter = new ChatAdapter(chats, userId);
+    private void displayChats(ArrayList<Chat> chats){
+        Log.e("Chats", chats.toString());
+        chatAdapter = new ChatAdapter(chats, userId);
         recycler_view.setAdapter(chatAdapter);
     }
+
 
 }

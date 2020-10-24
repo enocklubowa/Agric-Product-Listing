@@ -34,7 +34,7 @@
             android:paddingTop="@dimen/spacing_medium">
 
             <TextView
-                android:id="@+id/text_content_you"
+                android:id="@+id/text_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/spacing_medium"
@@ -51,7 +51,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/text_time_you"
+                    android:id="@+id/text_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
