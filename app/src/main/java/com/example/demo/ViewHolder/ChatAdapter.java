@@ -1,6 +1,7 @@
 package com.example.demo.ViewHolder;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.demo.R;
 import com.example.demo.model.Chat;
 
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
@@ -59,7 +65,11 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ChatAdapter.ViewHolder holder, int position) {
         Chat chat = chats.get(position);
-        holder.timeField.setText(chat.getTime());
+        DateFormat format = new SimpleDateFormat("h:mm a");
+        Date date = new Date();
+        date.setTime(Long.parseLong(chat.getTime())*1000);
+        String readableTime = format.format(date);
+        holder.timeField.setText(readableTime);
         holder.messageField.setText(chat.getText());
 
     }
