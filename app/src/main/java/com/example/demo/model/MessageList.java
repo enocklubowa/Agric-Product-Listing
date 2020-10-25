@@ -1,20 +1,20 @@
 package com.example.demo.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MessageList {
-    ArrayList<Chat> messages;
-    Chat recentMessage;
-    String sender;
+    List<Chat> messages;
 
     public MessageList() {
     }
 
-    public MessageList(ArrayList<Chat> messages) {
+    public MessageList(List<Chat> messages) {
         this.messages = messages;
     }
 
-    public ArrayList<Chat> getMessages() {
+    public List<Chat> getMessages() {
         return messages;
     }
 
@@ -22,12 +22,23 @@ public class MessageList {
         this.messages = messages;
     }
 
+    /*
     public Chat getRecentMessage() {
-
-        return messages.get(messages.size()-1);
+        if (messages.size()>0){
+            return messages.get(messages.size()-1);
+        }
+        return null;
     }
 
     public String getSender() {
-        return messages.get(0).getSender();
+        if(messages.size()>0){
+            return messages.get(0).getSender();
+
+        }
+        return null;
     }
+
+     */
+
+
 }

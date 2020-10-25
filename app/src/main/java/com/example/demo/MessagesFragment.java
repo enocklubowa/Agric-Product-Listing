@@ -7,9 +7,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.example.demo.ViewHolder.MessageAdapter;
 import com.example.demo.model.MessageList;
@@ -23,16 +25,19 @@ public class MessagesFragment extends Fragment {
     private RecyclerView messagesRecyclerView;
     private Query messagesQuery;
     private String userId;
+    private FirebaseRecyclerAdapter<MessageList, MessageAdapter> firebaseRecyclerAdapter;
+    private ProgressBar loading_messages;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_messages, container, false);
+        loading_messages = rootView.findViewById(R.id.loading_messages);
         messagesRecyclerView = rootView.findViewById(R.id.messages_recycler_view);
         messagesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         messagesRecyclerView.setHasFixedSize(true);
         userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        messagesQuery = FirebaseDatabase.getInstance().getReference().child("chats").child(userId);
+        messagesQuery = FirebaseDatabase.getInstance().getReference().child("chats").child(userId).orderByValue();
         retrieveMessages();
         return rootView;
     }
@@ -43,23 +48,42 @@ public class MessagesFragment extends Fragment {
                 .setQuery(messagesQuery, MessageList.class)
                 .build();
 
-        FirebaseRecyclerAdapter<MessageList, MessageAdapter> firebaseRecyclerAdapter
+        firebaseRecyclerAdapter
                 = new FirebaseRecyclerAdapter<MessageList, MessageAdapter>(options) {
             @Override
             protected void onBindViewHolder(@NonNull MessageAdapter holder, int position, @NonNull MessageList model) {
-                holder.setDetails(model.getSender(), model.getRecentMessage().getText());
+                String key = firebaseRecyclerAdapter.getRef(position).getKey();
+                holder.setDetails(key, userId);
+
             }
 
             @NonNull
             @Override
             public MessageAdapter onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_message, parent, false);
+                loading_messages.setVisibility(View.GONE);
                 return new MessageAdapter(view);
+            }
+
+            @Override
+            public int getItemCount() {
+                if(super.getItemCount()==0){
+                    loading_messages.setVisibility(View.GONE);
+                }
+                return super.getItemCount();
             }
         };
 
         messagesRecyclerView.setAdapter(firebaseRecyclerAdapter);
         firebaseRecyclerAdapter.startListening();
+    }
+
+    @Override
+    public void onResume() {
+        if (firebaseRecyclerAdapter != null){
+            firebaseRecyclerAdapter.startListening();
+        }
+        super.onResume();
     }
 }
 

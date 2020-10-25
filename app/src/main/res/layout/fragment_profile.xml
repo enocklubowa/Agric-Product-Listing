@@ -45,7 +45,7 @@
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:layout_marginTop="@dimen/spacing_xlarge"
-                        android:src="@drawable/profile_image"
+                        android:src="@drawable/ic_profile"
                         app:civ_border="true"
                         app:civ_shadow="true"
                         app:civ_shadow_radius="0"

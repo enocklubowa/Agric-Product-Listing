@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import java.io.Serializable;
+
 public class Chat {
     private String text, time, sender, receiver;
     private boolean isRead;
@@ -60,5 +62,16 @@ public class Chat {
 
     public void setReceiver(String receiver) {
         this.receiver = receiver;
+    }
+
+    @Override
+    public String toString() {
+        return "Chat{" +
+                "text='" + text + '\'' +
+                ", time='" + time + '\'' +
+                ", sender='" + sender + '\'' +
+                ", receiver='" + receiver + '\'' +
+                ", isRead=" + isRead +
+                '}';
     }
 }

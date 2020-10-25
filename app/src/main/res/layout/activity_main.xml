@@ -64,7 +64,8 @@
                             android:text="Email address"
                             android:textAlignment="center"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
-                            android:textColor="@color/grey_40" />
+                            android:textColor="@color/grey_40"
+                            android:gravity="center_horizontal" />
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/email"
@@ -88,7 +89,8 @@
                             android:text="PASSWORD"
                             android:textAlignment="center"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Caption"
-                            android:textColor="@color/grey_40" />
+                            android:textColor="@color/grey_40"
+                            android:gravity="center_horizontal" />
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/password"

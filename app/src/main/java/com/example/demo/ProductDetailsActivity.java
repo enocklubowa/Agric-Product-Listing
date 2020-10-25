@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
 public class ProductDetailsActivity extends AppCompatActivity {
@@ -36,6 +37,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     private TextView description_field, location_field, price_field, name_field;
     private ImageView product_image;
     private LinearLayout description_layout;
+    private String userId;
 
 
     @Override
@@ -71,6 +73,9 @@ public class ProductDetailsActivity extends AppCompatActivity {
         name_field = findViewById(R.id.product_name);
         name_field.setText(product_name);
 
+        userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+
         price_field = findViewById(R.id.price);
         String shillings_format = "UGX "+price;
         price_field.setText(shillings_format);
@@ -101,12 +106,17 @@ public class ProductDetailsActivity extends AppCompatActivity {
         toggleArrow(bt_toggle_description);
         description_layout.setVisibility(View.VISIBLE);
 
-        ((ExtendedFloatingActionButton) findViewById(R.id.fab)).setOnClickListener(new View.OnClickListener() {
+        ExtendedFloatingActionButton message_button = findViewById(R.id.fab);
+        if (userId.equals(sellerId)){
+            message_button.setVisibility(View.GONE);
+        }
+        message_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openChatActivity();
             }
         });
+
     }
 
     private void toggleSection(View bt, final View lyt) {
