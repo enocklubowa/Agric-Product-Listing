@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
                                 Log.e("Login status","Successful");
-                                startActivity(new Intent(MainActivity.this, Demo.class));
+                                startActivity(new Intent(MainActivity.this, HomeActivity.class));
                                 finish();
                             }
                             else {
@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void loginStatus(){
         if(auth.getCurrentUser() != null){
-            startActivity(new Intent(this, Demo.class));
+            startActivity(new Intent(this, HomeActivity.class));
             finish();
         }
     }

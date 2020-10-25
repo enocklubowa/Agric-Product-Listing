@@ -13,13 +13,13 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class Demo extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity {
     private BottomNavigationView navigation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.demo);
+        setContentView(R.layout.activity_home);
 
         navigation = findViewById(R.id.navigation);
         //BottomNavigationViewHelper.disableShiftMode(navigation);
@@ -43,9 +43,11 @@ public class Demo extends AppCompatActivity {
         switch (itemId){
             case R.id.navigation_1:
                 fragment = new ProductListFragment();
-
                 break;
             case R.id.navigation_2:
+                fragment= new MessagesFragment();
+                break;
+            case R.id.navigation_3:
                 fragment= new CropInfoFragment();
                 break;
 

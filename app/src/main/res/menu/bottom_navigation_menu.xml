@@ -8,6 +8,11 @@
 
     <item
         android:id="@+id/navigation_2"
+        android:icon="@drawable/ic_review"
+        android:title="Messages" />
+
+    <item
+        android:id="@+id/navigation_3"
         android:icon="@drawable/ic_explore"
         android:title="Pest &amp; Diseases" />
 

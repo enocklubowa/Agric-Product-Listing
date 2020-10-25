@@ -33,6 +33,7 @@ import com.example.demo.ViewHolder.ChatAdapter;
 import com.example.demo.model.Chat;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -135,8 +136,21 @@ public class ChatActivity extends AppCompatActivity {
         if(textContent.getText().length() != 0){
             Long time = System.currentTimeMillis()/1000;
             Chat chat = new Chat(textContent.getText().toString(), time.toString(), userId, sellerId, false);
-            DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("chats").push();
-            reference.setValue(chat);
+            DatabaseReference myChatReference = FirebaseDatabase.getInstance().getReference().child("chats")
+                    .child(userId).child(sellerId).push();
+            myChatReference.setValue(chat).addOnSuccessListener(
+                    new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            chatAdapter.notifyDataSetChanged();
+                        }
+                    }
+            );
+            DatabaseReference theirChatReference = FirebaseDatabase.getInstance().getReference().child("chats")
+                    .child(sellerId).child(userId).push();
+            theirChatReference.setValue(chat);
+
+
             //chatAdapter.insertItem(chat);
             chatAdapter.notifyDataSetChanged();
             textContent.getText().clear();
@@ -212,17 +226,14 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void updateChats(){
-        DatabaseReference chatsReference = FirebaseDatabase.getInstance().getReference().child("chats");
+        DatabaseReference chatsReference = FirebaseDatabase.getInstance().getReference().child("chats")
+                .child(userId).child(sellerId);
         chatsReference.addChildEventListener(
                 new ChildEventListener() {
                     @Override
                     public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                         Chat chat = dataSnapshot.getValue(Chat.class);
-                        if((chat.getSender().equals(userId) && chat.getReceiver().equals(sellerId))
-                                || (chat.getSender().equals(sellerId) && chat.getReceiver().equals(userId))){
-                            chats.add(chat);
-                            //displayChat(chat);
-                        }
+                        chats.add(chat);
                     }
 
                     @Override

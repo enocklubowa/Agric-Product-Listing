@@ -12,7 +12,7 @@
         <activity android:name=".ChatActivity"></activity>
         <activity android:name=".ProductDetailsActivity" />
         <activity android:name=".PestDetails" />
-        <activity android:name=".Demo" />
+        <activity android:name=".HomeActivity" />
         <activity android:name=".AddProductActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".MainActivity">
