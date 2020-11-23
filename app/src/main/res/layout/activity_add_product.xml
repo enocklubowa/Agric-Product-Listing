@@ -228,6 +228,7 @@
                     android:id="@+id/product_price"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:inputType="number"
                     android:background="@drawable/edit_text_round_bg_outline"
                     android:textColorHint="@color/grey_20" />
 
