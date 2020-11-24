@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,7 +36,7 @@ import com.squareup.picasso.Picasso;
 public class ProductAdapter extends RecyclerView.ViewHolder{
     public View view;
     private TextView name_field, price_field, location_field;
-    private Button callButton, chatButton;
+    private ImageButton callButton, chatButton;
     private String sellerPhone;
     private static final int REQUEST_PHONE_CALL = 1;
 
@@ -50,8 +51,8 @@ public class ProductAdapter extends RecyclerView.ViewHolder{
         name_field = (TextView) view.findViewById(R.id.product_name);
         price_field = (TextView) view.findViewById(R.id.product_price);
         location_field = (TextView) view.findViewById(R.id.product_location);
-        callButton = (Button) view.findViewById(R.id.call_button);
-        chatButton = (Button) view.findViewById(R.id.chat_button);
+        callButton = (ImageButton) view.findViewById(R.id.call_button);
+        chatButton = (ImageButton) view.findViewById(R.id.chat_button);
         LoaderImageView image = (LoaderImageView) view.findViewById(R.id.product_cover_image);
         LinearLayout clickable_view = (LinearLayout) view.findViewById(R.id.lyt_parent);
 

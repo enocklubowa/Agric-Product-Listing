@@ -104,25 +104,25 @@
                 android:orientation="horizontal"
                 android:weightSum="2">
 
-                <Button
+                <ImageButton
                     android:id="@+id/chat_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="chat"
                     android:layout_weight="1"
                     android:textSize="12sp"
+                    android:tint="@color/colorPrimary"
                     android:layout_marginRight="2dp"
-                    android:drawableLeft="@drawable/ic_review"
-                    android:drawableTint="#fff"/>
-                <Button
+                    app:srcCompat="@drawable/ic_review"/>
+                <ImageButton
                     android:id="@+id/call_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="call"
                     android:textSize="12sp"
                     android:layout_marginLeft="2dp"
-                    android:drawableLeft="@drawable/ic_phone"/>
+                    android:tint="@color/colorPrimary"
+                    app:srcCompat="@drawable/ic_phone"
+                    />
 
             </LinearLayout>
 
